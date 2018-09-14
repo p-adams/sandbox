@@ -15,17 +15,13 @@ class EmployeeTableViewPane extends React.Component {
   }
   render() {
     const employeeList = this.state.employees.map((employee, key) => (
-      <li key={key}>
-        <EmployeeListItem {...employee} />
-      </li>
+      <EmployeeListItem key={key} {...employee} />
     ));
     return (
       <div className="viewPaneHeight w-full bg-white">
         <h4 className="text-center mt-2 text-grey">Employees Directory</h4>
-        <div>
-          <ul className="employeeListContainer mt-4 p-2 bg-grey-light overflow-auto">
-            {employeeList}
-          </ul>
+        <div className="employeeListContainer mt-4 p-2 bg-grey-light overflow-auto">
+          {employeeList}
         </div>
         <hr />
         <div className="w-full border-t flex justify-center">
