@@ -64,13 +64,7 @@ class AppForm extends React.Component {
         </div>
         <div className="flex flex-wrap mx-3 mb-2">
           <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label
-              className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-              htmlFor="grid-password"
-            >
-              Department
-            </label>
-            <AppSelect />
+            <AppSelect label="Department" options={["a"]} />
           </div>
           <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
             <label

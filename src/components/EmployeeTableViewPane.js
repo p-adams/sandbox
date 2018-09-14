@@ -1,7 +1,9 @@
 import React from "react";
 import "../css/App.css";
 import getEmployeesFromApi from "../utils/get-employees-from-api";
+import AppTableView from "./AppTableView";
 import EmployeeListItem from "./EmployeeListItem";
+import AppSelect from "./AppSelect";
 import AppButton from "./AppButton";
 
 class EmployeeTableViewPane extends React.Component {
@@ -20,6 +22,12 @@ class EmployeeTableViewPane extends React.Component {
     return (
       <div className="viewPaneHeight w-full bg-white">
         <h4 className="text-center mt-2 text-grey">Employees Directory</h4>
+        <div className="flex ml-2 mt-4">
+          <AppSelect
+            label="Filter employees by department"
+            options={["a", "b", "c"]}
+          />
+        </div>
         <div className="employeeListContainer mt-4 p-2 bg-grey-light overflow-auto">
           {employeeList}
         </div>
