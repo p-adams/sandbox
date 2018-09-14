@@ -1,4 +1,9 @@
+h4 {
+  padding: 5px;
+}
+
 .viewPaneHeight {
+  margin-top: 60px;
   height: 550px;
 }
 

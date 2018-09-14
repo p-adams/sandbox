@@ -4,7 +4,7 @@ import getEmployeesFromApi from "../utils/get-employees-from-api";
 import EmployeeListItem from "./EmployeeListItem";
 import AppButton from "./AppButton";
 
-class EmployeeListViewPane extends React.Component {
+class EmployeeTableViewPane extends React.Component {
   state = {
     employees: []
   };
@@ -20,14 +20,15 @@ class EmployeeListViewPane extends React.Component {
       </li>
     ));
     return (
-      <div className="viewPaneHeight w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/4 m-4 shadow-md bg-white">
+      <div className="viewPaneHeight w-full bg-white">
         <h4 className="text-center mt-2 text-grey">Employees Directory</h4>
         <div>
           <ul className="employeeListContainer mt-4 p-2 bg-grey-light overflow-auto">
             {employeeList}
           </ul>
         </div>
-        <div className="h-16 border border-t">
+        <hr />
+        <div className="w-full border-t flex justify-center">
           <AppButton {...{ btnText: "Load More" }} />
         </div>
       </div>
@@ -35,4 +36,4 @@ class EmployeeListViewPane extends React.Component {
   }
 }
 
-export default EmployeeListViewPane;
+export default EmployeeTableViewPane;

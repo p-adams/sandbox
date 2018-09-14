@@ -9,7 +9,7 @@ class EmployeeListItem extends React.Component {
     const { job_titles, name } = this.props;
     const { first, last } = parser(name);
     return (
-      <div className="max-w-sm m-2 p-2 bg-white rounded overflow-hidden shadow-md">
+      <div className="max-w m-2 p-2 bg-white rounded overflow-hidden border border-white hover:border-blue shadow-md cursor-pointer">
         <h5>Firstname: {first}</h5>
         <h5>Lastname: {last}</h5>
         <h5>Job Title: {job_titles}</h5>
