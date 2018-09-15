@@ -1,22 +1,13 @@
 import React from "react";
 import "../css/App.css";
-import getEmployeesFromApi from "../utils/get-employees-from-api";
 import AppTableView from "./AppTableView";
 import EmployeeListItem from "./EmployeeListItem";
 import AppSelect from "./AppSelect";
 import AppButton from "./AppButton";
 
 class EmployeeTableViewPane extends React.Component {
-  state = {
-    employees: []
-  };
-  componentDidMount() {
-    getEmployeesFromApi().then(employeesFromApi =>
-      this.setState({ employees: [...employeesFromApi] })
-    );
-  }
   render() {
-    const employeeList = this.state.employees.map((employee, key) => (
+    const employeeList = this.props.employees.map((employee, key) => (
       <EmployeeListItem key={key} {...employee} />
     ));
     return (
@@ -25,7 +16,7 @@ class EmployeeTableViewPane extends React.Component {
         <div className="flex ml-2 mt-4">
           <AppSelect
             label="Filter employees by department"
-            options={["a", "b", "c"]}
+            options={this.props.departments}
           />
         </div>
         <div className="employeeListContainer mt-4 p-2 bg-grey-light overflow-auto">

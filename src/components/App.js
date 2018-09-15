@@ -1,14 +1,25 @@
 import React, { Component } from "react";
-/* import { library } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheckSquare } from "@fortawesome/free-solid-svg-icons";
-library.add(faCheckSquare); */
-import "../css/App.css";
+import { Router, Link } from "@reach/router";
+import getEmployeesFromApi from "../utils/get-employees-from-api";
 import EmployeeTableViewPane from "./EmployeeTableViewPane";
 import EmployeeProfileViewPane from "./EmployeeProfileViewPane";
 import FormViewPane from "./FormViewPane";
-import { Router, Link } from "@reach/router";
+import "../css/App.css";
 class App extends Component {
+  state = {
+    employees: []
+  };
+  componentDidMount() {
+    getEmployeesFromApi().then(employeesFromApi =>
+      this.setState({ employees: [...employeesFromApi] })
+    );
+  }
+  uniqueEmployeeDepartments = () => {
+    const departments = this.state.employees.map(
+      employee => employee.department
+    );
+    return [...new Set(departments)];
+  };
   render() {
     return (
       <div>
@@ -28,15 +39,17 @@ class App extends Component {
             </Link>
           </nav>
           <Router>
-            <EmployeeTableViewPane path="/" />
+            <EmployeeTableViewPane
+              path="/"
+              employees={this.state.employees}
+              departments={this.uniqueEmployeeDepartments()}
+            />
             <EmployeeProfileViewPane path="profile" />
-            <FormViewPane path="form" />
+            <FormViewPane
+              path="form"
+              departments={this.uniqueEmployeeDepartments()}
+            />
           </Router>
-          {/*<div className="flex flex-wrap bg-grey h-screen">
-          <EmployeeListViewPane />
-          <SelectedEmployeeProfileViewPane />
-          <FormViewPane />
-    </div> */}
         </div>
       </div>
     );

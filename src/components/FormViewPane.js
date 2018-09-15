@@ -1,5 +1,5 @@
 import React from "react";
-import AppForm from "./AppForm";
+import NewEmployeeForm from "./NewEmployeeForm";
 
 class FormViewPane extends React.Component {
   render() {
@@ -9,7 +9,7 @@ class FormViewPane extends React.Component {
         <div className="flex">
           <div className="w-1/3" />
           <div className="w-2/3 mt-16">
-            <AppForm />
+            <NewEmployeeForm departments={this.props.departments} />
           </div>
           <div className="w-1/3" />
         </div>
