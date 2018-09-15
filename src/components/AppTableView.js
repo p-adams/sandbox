@@ -1,9 +1,9 @@
 import React from "react";
-import AppTableViewItem from "./AppTableViewItem";
+import AppTableViewCell from "./AppTableViewCell";
 
 const AppTableView = ({ items }) => {
   const tableViewItems = items.map((item, key) => (
-    <AppTableViewItem key={key} {...item} />
+    <AppTableViewCell key={key} {...item} />
   ));
   return <div>{tableViewItems}</div>;
 };
