@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Router, Link } from "@reach/router";
 import getEmployeesFromApi from "../utils/get-employees-from-api";
-import EmployeeTableView from "./pages/EmployeeTableView";
+import EmployeeListView from "./pages/EmployeeListView";
 import EmployeeProfileView from "./pages/EmployeeProfileView";
 import FormView from "./pages/FormView";
 import "../css/App.css";
@@ -39,7 +39,7 @@ class App extends Component {
             </Link>
           </nav>
           <Router>
-            <EmployeeTableView
+            <EmployeeListView
               path="/"
               employees={this.state.employees}
               departments={this.uniqueEmployeeDepartments()}

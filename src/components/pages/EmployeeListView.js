@@ -1,10 +1,14 @@
 import React from "react";
 import { filteredEmployees } from "../../helpers/filters";
 import AppTableView from "../AppTableView";
-import EmployeeListItem from "../EmployeeListItem";
+import NavigableView from "../NavigableView";
 import AppSelect from "../AppSelect";
 import AppButton from "../AppButton";
-import "../../css/App.css";
+// A simple name parsing module
+// that handles parsing fullnames
+// in format retrieved from API
+// Source: https://www.npmjs.com/package/another-name-parser
+import parser from "another-name-parser";
 
 class EmployeeTableView extends React.Component {
   state = {
@@ -12,19 +16,30 @@ class EmployeeTableView extends React.Component {
   };
   render() {
     const { selectedDepartment } = this.state;
-    const filteredEmployeeList = filteredEmployees(
-      this.props.employees,
-      "department",
-      [selectedDepartment]
-    ).map((employee, key) => <EmployeeListItem key={key} {...employee} />);
+    const { departments, employees } = this.props;
+    // Filter employees by selected department
+    const processedEmployeeList = filteredEmployees(employees, "department", [
+      selectedDepartment
+    ])
+      // Return only those employee fields we wish to reference in the TableView
+      .map(filteredEmployee => {
+        const { id, job_titles, name } = filteredEmployee;
+        const { first, last } = parser(name);
+        return {
+          id,
+          first,
+          last,
+          job_titles
+        };
+      });
     return (
       <div className="viewPaneHeight w-full bg-white">
         <h4 className="text-center mt-2 text-grey">Employees Directory</h4>
         <div className="flex ml-2 mt-4">
           <AppSelect
             label="Filter employees by department"
-            options={this.props.departments}
-            value={this.state.selectedDepartment}
+            options={departments}
+            value={selectedDepartment}
             doesFilter={true}
             handleChange={e =>
               this.setState({
@@ -33,9 +48,9 @@ class EmployeeTableView extends React.Component {
             }
           />
         </div>
-        <div className="employeeListContainer mt-4 p-2 bg-grey-light overflow-auto">
-          {filteredEmployeeList}
-        </div>
+        <NavigableView
+          renderView={() => <AppTableView items={processedEmployeeList} />}
+        />
         <hr />
         <div className="w-full border-t flex justify-center">
           <AppButton {...{ btnText: "Load More" }} />
