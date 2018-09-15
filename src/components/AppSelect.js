@@ -19,6 +19,7 @@ const AppSelect = props => {
         value={props.value}
         onChange={props.handleChange}
       >
+        <option selected>{props.doesFilter ? "SHOW ALL" : "SELECT ONE"}</option>
         {options}
       </select>
       <div className="pointer-events-none absolute pin-y pin-r mt-6 flex items-center px-2 text-grey-darker">

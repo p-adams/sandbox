@@ -5,11 +5,27 @@ import AppSelect from "../AppSelect";
 import AppButton from "../AppButton";
 import "../../css/App.css";
 
+// A generic function to extend filtering beyond
+// filtering employees by department
+function EmployeesFilters(employees, filterBy, filters) {
+  const filteredResults = employees.filter(employee =>
+    filters.some(
+      filter =>
+        filter !== "SHOW ALL" ? employee[filterBy] === filter : employee
+    )
+  );
+  return filteredResults;
+}
+
 class EmployeeTableView extends React.Component {
+  state = {
+    selectedDepartment: "SHOW ALL"
+  };
   render() {
-    const employeeList = this.props.employees.map((employee, key) => (
-      <EmployeeListItem key={key} {...employee} />
-    ));
+    const { selectedDepartment } = this.state;
+    const employeeList = EmployeesFilters(this.props.employees, "department", [
+      selectedDepartment
+    ]).map((employee, key) => <EmployeeListItem key={key} {...employee} />);
     return (
       <div className="viewPaneHeight w-full bg-white">
         <h4 className="text-center mt-2 text-grey">Employees Directory</h4>
@@ -17,6 +33,13 @@ class EmployeeTableView extends React.Component {
           <AppSelect
             label="Filter employees by department"
             options={this.props.departments}
+            value={this.state.selectedDepartment}
+            doesFilter={true}
+            handleChange={e =>
+              this.setState({
+                selectedDepartment: e.target.value
+              })
+            }
           />
         </div>
         <div className="employeeListContainer mt-4 p-2 bg-grey-light overflow-auto">
