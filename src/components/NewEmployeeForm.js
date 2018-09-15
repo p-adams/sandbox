@@ -13,7 +13,6 @@ class NewEmployeeForm extends React.Component {
       department: ""
     }
   };
-  componentDidMount() {}
   handleInputChange = ({ value, field }) => {
     this.setState(prevState => ({
       newEmployee: { ...prevState.newEmployee, [field]: value }
