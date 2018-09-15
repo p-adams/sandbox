@@ -1,7 +1,7 @@
 import React from "react";
-import NewEmployeeForm from "./NewEmployeeForm";
+import NewEmployeeForm from "../NewEmployeeForm";
 
-class FormViewPane extends React.Component {
+class FormView extends React.Component {
   render() {
     return (
       <div className="viewPaneHeight w-full bg-white">
@@ -18,4 +18,4 @@ class FormViewPane extends React.Component {
   }
 }
 
-export default FormViewPane;
+export default FormView;

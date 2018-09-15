@@ -1,11 +1,11 @@
 import React from "react";
 import "../css/App.css";
-import AppTableView from "./AppTableView";
-import EmployeeListItem from "./EmployeeListItem";
-import AppSelect from "./AppSelect";
-import AppButton from "./AppButton";
+import AppTableView from "../AppTableView";
+import EmployeeListItem from "../EmployeeListItem";
+import AppSelect from "../AppSelect";
+import AppButton from "../AppButton";
 
-class EmployeeTableViewPane extends React.Component {
+class EmployeeTableView extends React.Component {
   render() {
     const employeeList = this.props.employees.map((employee, key) => (
       <EmployeeListItem key={key} {...employee} />
@@ -31,4 +31,4 @@ class EmployeeTableViewPane extends React.Component {
   }
 }
 
-export default EmployeeTableViewPane;
+export default EmployeeTableView;

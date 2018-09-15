@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Router, Link } from "@reach/router";
 import getEmployeesFromApi from "../utils/get-employees-from-api";
-import EmployeeTableViewPane from "./EmployeeTableViewPane";
-import EmployeeProfileViewPane from "./EmployeeProfileViewPane";
-import FormViewPane from "./FormViewPane";
+import EmployeeTableView from "./pages/EmployeeTableView";
+import EmployeeProfileView from "./pages/EmployeeProfileView";
+import FormView from "./pages/FormView";
 import "../css/App.css";
 class App extends Component {
   state = {
@@ -39,13 +39,13 @@ class App extends Component {
             </Link>
           </nav>
           <Router>
-            <EmployeeTableViewPane
+            <EmployeeTableView
               path="/"
               employees={this.state.employees}
               departments={this.uniqueEmployeeDepartments()}
             />
-            <EmployeeProfileViewPane path="profile" />
-            <FormViewPane
+            <EmployeeProfileView path="profile" />
+            <FormView
               path="form"
               departments={this.uniqueEmployeeDepartments()}
             />

@@ -83,7 +83,7 @@ class NewEmployeeForm extends React.Component {
             />
           </div>
         </div>
-        <div className="flex flex-wrap mx-3 mb-2">
+        <div className="flex flex-wrap mx-3 mb-6">
           <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
             <AppSelect
               label="Department"
@@ -97,23 +97,9 @@ class NewEmployeeForm extends React.Component {
               }
             />
           </div>
-          <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <AppInput
-              type="text"
-              label="Department not listed?"
-              value={newEmployee.department}
-              handleChange={e =>
-                this.handleInputChange({
-                  value: e.target.value,
-                  field: "department"
-                })
-              }
-              placeholder="Enter department"
-            />
-          </div>
-          <div className="w-full md:w-1/3 -ml-2 mt-3">
-            <AppButton {...{ btnText: "Add employee" }} />
-          </div>
+        </div>
+        <div className="flex justify-end mx-3 mb-2">
+          <AppButton {...{ btnText: "Add employee" }} />
         </div>
       </div>
     );
