@@ -4,19 +4,19 @@ import NavigableView from "../NavigableView";
 import CurrentEmployeeProfileView from "../CurrentEmployeeProfileView";
 
 class EmployeeProfileViewPane extends React.Component {
-  getPreviousEmployee() {
+  /* getPreviousEmployee() {
     const { employees } = this.props;
     const currentEmployeeIndex = employees.findIndex(
       employee => employee.id === this.state.currentEmployee.id
     );
     console.log(currentEmployeeIndex);
     if (currentEmployeeIndex !== -1) {
-      /* this.setState({
+      this.setState({
         currentEmployee: employees[currentEmployeeIndex - 1]
-      }); */
+      }); 
     }
-  }
-  getNextEmployee() {}
+  } 
+  getNextEmployee() {} */
   render() {
     const { employees, employeeId } = this.props;
 
@@ -28,8 +28,8 @@ class EmployeeProfileViewPane extends React.Component {
           <div className="w-2/3 mt-8">
             <div className="w-full p-1 max-w-lg h-64 shadow-lg">
               <NavigableView
-                items={employees}
-                navigationPath="employees"
+                // items={employees}
+                // navigationPath="employees"
                 renderView={currentNavigableItem => (
                   <div>
                     {currentNavigableItem}
@@ -51,3 +51,8 @@ class EmployeeProfileViewPane extends React.Component {
 }
 
 export default EmployeeProfileViewPane;
+
+/** PROPS
+ *            path="profile/:employeeId"
+              employees={this.filteredEmployeeList()}
+ */

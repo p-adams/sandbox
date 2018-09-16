@@ -1,5 +1,6 @@
 import React from "react";
 import { navigate } from "@reach/router";
+import { inject, observer } from "mobx-react";
 import AppTableView from "../AppTableView";
 import NavigableView from "../NavigableView";
 import AppSelect from "../AppSelect";
@@ -14,9 +15,9 @@ import { inject, observer } from "mobx-react";
 const EmployeesDirectoryView = inject("store")(
   observer(
     class EmployeesDirectoryView extends React.Component {
-      viewEmployeeProfile = employeeId => {
+      /* viewEmployeeProfile = employeeId => {
         navigate(`/profile/${employeeId}`);
-      };
+      }; */
       render() {
         const {
           departments,
@@ -75,4 +76,12 @@ const EmployeesDirectoryView = inject("store")(
   )
 );
 
-export default EmployeesDirectoryView;
+export default inject("store")(observer(EmployeesDirectoryView));
+
+/** PROPS
+ *            path="/employees"
+              employees={this.filteredEmployeeList()}
+              departments={this.uniqueEmployeeDepartments()}
+              handleEmployeeSelect={this.handleEmployeeSelect}
+              selectedDepartment={this.state.selectedDepartment}
+ */
