@@ -2,22 +2,24 @@ import React from "react";
 import AppTableViewCell from "./AppTableViewCell";
 import changeCase from "change-case";
 
-const AppTableView = ({ handleEvent, items }) => {
+const AppTableView = ({ handleEvent, items, currentItem }) => {
   const tableViewCells = items.map((item, key) => {
     return (
       <AppTableViewCell
         handleEvent={handleEvent}
         selectorId={item.id}
+        currentItem={currentItem}
+        itemKey={key}
         key={key}
         renderCell={() => (
           <React.Fragment>
             {Object.keys(item).map(
-              (key, index) =>
+              (itemKey, index) =>
                 // We want a reference to employee ID but we do
                 // not want to show it in the interface
-                key !== "id" ? (
+                itemKey !== "id" ? (
                   <div className="text-grey-darker text-sm" key={index}>
-                    {changeCase.title(key)}: {item[key]}
+                    {changeCase.title(itemKey)}: {item[itemKey]}
                   </div>
                 ) : null
             )}

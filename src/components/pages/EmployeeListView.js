@@ -13,8 +13,10 @@ import parser from "another-name-parser";
 
 class EmployeeTableView extends React.Component {
   state = {
-    selectedDepartment: "SHOW ALL"
+    selectedDepartment: "SHOW ALL",
+    employeeId: 0
   };
+
   viewEmployeeProfile = employeeId => {
     navigate(`/profile/${employeeId}`);
   };
@@ -53,10 +55,12 @@ class EmployeeTableView extends React.Component {
           />
         </div>
         <NavigableView
-          renderView={() => (
+          items={processedEmployeeList}
+          renderView={currentNavigableItem => (
             <AppTableView
               handleEvent={this.viewEmployeeProfile}
               items={processedEmployeeList}
+              currentItem={currentNavigableItem}
             />
           )}
         />
