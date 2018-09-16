@@ -1,4 +1,5 @@
 import React from "react";
+import { navigate } from "@reach/router";
 import { filteredEmployees } from "../../helpers/filters";
 import AppTableView from "../AppTableView";
 import NavigableView from "../NavigableView";
@@ -14,8 +15,8 @@ class EmployeeTableView extends React.Component {
   state = {
     selectedDepartment: "SHOW ALL"
   };
-  viewEmployeeProfile = id => {
-    console.log("clicked", id);
+  viewEmployeeProfile = employeeId => {
+    navigate(`/profile/${employeeId}`);
   };
   render() {
     const { selectedDepartment } = this.state;

@@ -1,5 +1,6 @@
 import React from "react";
 import AppTableViewCell from "./AppTableViewCell";
+import changeCase from "change-case";
 
 const AppTableView = ({ handleEvent, items }) => {
   const tableViewCells = items.map((item, key) => {
@@ -16,7 +17,7 @@ const AppTableView = ({ handleEvent, items }) => {
                 // not want to show it in the interface
                 key !== "id" ? (
                   <div className="text-grey-darker text-sm" key={index}>
-                    {key.toLocaleUpperCase()}: {item[key]}
+                    {changeCase.title(key)}: {item[key]}
                   </div>
                 ) : null
             )}

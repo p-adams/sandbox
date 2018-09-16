@@ -4,6 +4,7 @@ import getEmployeesFromApi from "../utils/get-employees-from-api";
 import EmployeeListView from "./pages/EmployeeListView";
 import EmployeeProfileView from "./pages/EmployeeProfileView";
 import FormView from "./pages/FormView";
+import NotFoundView from "./pages/NotFoundView";
 import "../css/App.css";
 class App extends Component {
   state = {
@@ -44,11 +45,12 @@ class App extends Component {
               employees={this.state.employees}
               departments={this.uniqueEmployeeDepartments()}
             />
-            <EmployeeProfileView path="profile" />
+            <EmployeeProfileView path="profile/:employeeId" />
             <FormView
               path="form"
               departments={this.uniqueEmployeeDepartments()}
             />
+            <NotFoundView default />
           </Router>
         </div>
       </div>
