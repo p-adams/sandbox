@@ -1,51 +1,25 @@
 import React from "react";
-import getSingleEmployeeFromApi from "../../utils/get-single-employee-from-api";
+
 import NavigableView from "../NavigableView";
-import changeCase from "change-case";
-import parser from "another-name-parser";
+import CurrentEmployeeProfileView from "../CurrentEmployeeProfileView";
 
 class EmployeeProfileViewPane extends React.Component {
-  state = {
-    currentEmployee: {}
-  };
-  componentDidMount() {
-    const { employeeId } = this.props;
-    getSingleEmployeeFromApi(employeeId).then(employee =>
-      this.setState({
-        currentEmployee: { ...employee }
-      })
-    );
-  }
-  render() {
-    const { currentEmployee } = this.state;
+  getPreviousEmployee() {
     const { employees } = this.props;
-
-    const processedEmployee = Object.keys(currentEmployee)
-      .map(() => {
-        // We want to extract the first and last name of the current employee
-        // so each are displayed distinctly to the user
-        const { name, ...employee } = currentEmployee;
-        const { first, last } = parser(name);
-        return {
-          ...employee,
-          first,
-          last
-        };
-      })
-      .reduce((acc, x) => {
-        for (var key in x) acc[key] = x[key];
-        return acc;
-      }, {});
-
-    const currentEmployeeProfile = Object.keys(processedEmployee).map(
-      (key, index) => {
-        return key !== "id" ? (
-          <div className="p-2 m-2 text-grey-darker text-lg" key={index}>
-            {changeCase.title(key)}: {processedEmployee[key]}
-          </div>
-        ) : null;
-      }
+    const currentEmployeeIndex = employees.findIndex(
+      employee => employee.id === this.state.currentEmployee.id
     );
+    console.log(currentEmployeeIndex);
+    if (currentEmployeeIndex !== -1) {
+      /* this.setState({
+        currentEmployee: employees[currentEmployeeIndex - 1]
+      }); */
+    }
+  }
+  getNextEmployee() {}
+  render() {
+    const { employees, employeeId } = this.props;
+
     return (
       <div className="viewPaneHeight w-full bg-white">
         <h4 className="text-center mt-2 text-grey">Employee Profile</h4>
@@ -58,7 +32,12 @@ class EmployeeProfileViewPane extends React.Component {
                 navigationPath="employees"
                 renderView={currentNavigableItem => (
                   <div>
-                    {currentNavigableItem} {currentEmployeeProfile}
+                    {currentNavigableItem}
+                    <CurrentEmployeeProfileView
+                      currentNavigableItem={currentNavigableItem}
+                      employeeId={employeeId}
+                      getPreviousEmployee={this.getPreviousEmployee}
+                    />
                   </div>
                 )}
               />{" "}

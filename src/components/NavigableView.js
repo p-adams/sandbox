@@ -8,10 +8,14 @@ class NavigableView extends React.Component {
     currentNavigableItem: 0
   };
   componentDidMount() {
+    // console.log("1", this.state.currentNavigableItem);
     document.addEventListener("keyup", this.nextNavigableItem);
   }
   componentWillUnmount() {
     document.removeEventListener("keyup", this.nextNavigableItem);
+  }
+  componentDidUpdate(prevProps) {
+    // console.log(prevProps);
   }
   nextNavigableItem = e => {
     const { currentNavigableItem } = this.state;
@@ -21,8 +25,7 @@ class NavigableView extends React.Component {
       const { id } = items[currentNavigableItem];
       // if we want to navigate away from a path that requires a URL param
       // to a path that does not require a URL param
-      // we check the navigationPath against a "list" of paths that do not require
-      // a URL param
+      // we check the navigationPath against a "list" of paths that do not require URL params
       const navPathsWithoutParams = ["employees"].find(
         path => path === navigationPath
       );
@@ -43,11 +46,7 @@ class NavigableView extends React.Component {
     }
   };
   render() {
-    return (
-      <div onKeyDown={e => this.nextNavigableItem(e)}>
-        {this.props.renderView(this.state.currentNavigableItem)}
-      </div>
-    );
+    return <div>{this.props.renderView(this.state.currentNavigableItem)}</div>;
   }
 }
 

@@ -6,7 +6,9 @@ import EmployeesDirectoryView from "./pages/EmployeesDirectoryView";
 import EmployeeProfileView from "./pages/EmployeesProfileView";
 import FormView from "./pages/FormView";
 import NotFoundView from "./pages/NotFoundView";
+import { inject, observer } from "mobx-react";
 import "../css/App.css";
+
 class App extends Component {
   state = {
     employees: [],
