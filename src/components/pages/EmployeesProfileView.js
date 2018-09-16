@@ -1,5 +1,6 @@
 import React from "react";
 import getSingleEmployeeFromApi from "../../utils/get-single-employee-from-api";
+import NavigableView from "../NavigableView";
 import changeCase from "change-case";
 import parser from "another-name-parser";
 
@@ -17,8 +18,12 @@ class EmployeeProfileViewPane extends React.Component {
   }
   render() {
     const { currentEmployee } = this.state;
+    const { employees } = this.props;
+
     const processedEmployee = Object.keys(currentEmployee)
       .map(() => {
+        // We want to extract the first and last name of the current employee
+        // so each are displayed distinctly to the user
         const { name, ...employee } = currentEmployee;
         const { first, last } = parser(name);
         return {
@@ -47,8 +52,16 @@ class EmployeeProfileViewPane extends React.Component {
         <div className="flex">
           <div className="w-1/3" />
           <div className="w-2/3 mt-8">
-            <div className="w-full p-1 max-w-lg h-64 overflow-scroll shadow-lg">
-              {currentEmployeeProfile}
+            <div className="w-full p-1 max-w-lg h-64 shadow-lg">
+              <NavigableView
+                items={employees}
+                navigationPath="employees"
+                renderView={currentNavigableItem => (
+                  <div>
+                    {currentNavigableItem} {currentEmployeeProfile}
+                  </div>
+                )}
+              />{" "}
             </div>
           </div>
           <div className="w-1/3" />

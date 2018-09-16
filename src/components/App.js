@@ -1,25 +1,39 @@
 import React, { Component } from "react";
 import { Router, Link } from "@reach/router";
+import { filteredEmployees } from "../helpers/filters";
 import getEmployeesFromApi from "../utils/get-employees-from-api";
-import EmployeeListView from "./pages/EmployeeListView";
-import EmployeeProfileView from "./pages/EmployeeProfileView";
+import EmployeesDirectoryView from "./pages/EmployeesDirectoryView";
+import EmployeeProfileView from "./pages/EmployeesProfileView";
 import FormView from "./pages/FormView";
 import NotFoundView from "./pages/NotFoundView";
 import "../css/App.css";
 class App extends Component {
   state = {
-    employees: []
+    employees: [],
+    selectedDepartment: "SHOW ALL"
   };
   componentDidMount() {
     getEmployeesFromApi().then(employeesFromApi =>
       this.setState({ employees: [...employeesFromApi] })
     );
   }
+
+  handleEmployeeSelect = e => {
+    this.setState({
+      selectedDepartment: e.target.value
+    });
+  };
+
   uniqueEmployeeDepartments = () => {
     const departments = this.state.employees.map(
       employee => employee.department
     );
     return [...new Set(departments)];
+  };
+  filteredEmployeeList = () => {
+    return filteredEmployees(this.state.employees, "department", [
+      this.state.selectedDepartment
+    ]);
   };
   render() {
     return (
@@ -29,7 +43,7 @@ class App extends Component {
         </div>
         <div className="bg-grey h-screen">
           <nav className="flex justify-center">
-            <Link className="p-1" to="/">
+            <Link className="p-1" to="/employees">
               View all employees
             </Link>
             <Link className="p-1" to="profile">
@@ -40,12 +54,17 @@ class App extends Component {
             </Link>
           </nav>
           <Router>
-            <EmployeeListView
-              path="/"
-              employees={this.state.employees}
+            <EmployeesDirectoryView
+              path="/employees"
+              employees={this.filteredEmployeeList()}
               departments={this.uniqueEmployeeDepartments()}
+              handleEmployeeSelect={this.handleEmployeeSelect}
+              selectedDepartment={this.state.selectedDepartment}
             />
-            <EmployeeProfileView path="profile/:employeeId" />
+            <EmployeeProfileView
+              path="profile/:employeeId"
+              employees={this.filteredEmployeeList()}
+            />
             <FormView
               path="form"
               departments={this.uniqueEmployeeDepartments()}

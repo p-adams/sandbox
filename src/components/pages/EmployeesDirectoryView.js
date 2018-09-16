@@ -1,6 +1,5 @@
 import React from "react";
 import { navigate } from "@reach/router";
-import { filteredEmployees } from "../../helpers/filters";
 import AppTableView from "../AppTableView";
 import NavigableView from "../NavigableView";
 import AppSelect from "../AppSelect";
@@ -11,22 +10,19 @@ import AppButton from "../AppButton";
 // Source: https://www.npmjs.com/package/another-name-parser
 import parser from "another-name-parser";
 
-class EmployeeTableView extends React.Component {
-  state = {
-    selectedDepartment: "SHOW ALL",
-    employeeId: 0
-  };
-
+class EmployeesDirectoryView extends React.Component {
   viewEmployeeProfile = employeeId => {
     navigate(`/profile/${employeeId}`);
   };
   render() {
-    const { selectedDepartment } = this.state;
-    const { departments, employees } = this.props;
-    // Filter employees by selected department
-    const processedEmployeeList = filteredEmployees(employees, "department", [
+    const {
+      departments,
+      employees,
+      handleEmployeeSelect,
       selectedDepartment
-    ])
+    } = this.props;
+    // Filter employees by selected department
+    const processedEmployeeList = employees
       // Return only those employee fields we wish to reference in the TableView
       .map(filteredEmployee => {
         const { id, job_titles, name } = filteredEmployee;
@@ -47,15 +43,12 @@ class EmployeeTableView extends React.Component {
             options={departments}
             value={selectedDepartment}
             doesFilter={true}
-            handleChange={e =>
-              this.setState({
-                selectedDepartment: e.target.value
-              })
-            }
+            handleChange={handleEmployeeSelect}
           />
         </div>
         <NavigableView
           items={processedEmployeeList}
+          navigationPath="profile"
           renderView={currentNavigableItem => (
             <AppTableView
               handleEvent={this.viewEmployeeProfile}
@@ -73,4 +66,4 @@ class EmployeeTableView extends React.Component {
   }
 }
 
-export default EmployeeTableView;
+export default EmployeesDirectoryView;
