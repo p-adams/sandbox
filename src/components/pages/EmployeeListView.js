@@ -14,6 +14,9 @@ class EmployeeTableView extends React.Component {
   state = {
     selectedDepartment: "SHOW ALL"
   };
+  viewEmployeeProfile = id => {
+    console.log("clicked", id);
+  };
   render() {
     const { selectedDepartment } = this.state;
     const { departments, employees } = this.props;
@@ -49,7 +52,12 @@ class EmployeeTableView extends React.Component {
           />
         </div>
         <NavigableView
-          renderView={() => <AppTableView items={processedEmployeeList} />}
+          renderView={() => (
+            <AppTableView
+              handleEvent={this.viewEmployeeProfile}
+              items={processedEmployeeList}
+            />
+          )}
         />
         <hr />
         <div className="w-full border-t flex justify-center">

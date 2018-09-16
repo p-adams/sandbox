@@ -1,10 +1,12 @@
 import React from "react";
 import AppTableViewCell from "./AppTableViewCell";
 
-const AppTableView = ({ items }) => {
+const AppTableView = ({ handleEvent, items }) => {
   const tableViewCells = items.map((item, key) => {
     return (
       <AppTableViewCell
+        handleEvent={handleEvent}
+        selectorId={item.id}
         key={key}
         renderCell={() => (
           <React.Fragment>
