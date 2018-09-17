@@ -1,42 +1,13 @@
 import React, { Component } from "react";
 import { Router, Link } from "@reach/router";
-//
-// import getEmployeesFromApi from "../utils/get-employees-from-api";
 import EmployeesDirectoryView from "./pages/EmployeesDirectoryView";
 import EmployeeProfileView from "./pages/EmployeesProfileView";
 import FormView from "./pages/FormView";
 import NotFoundView from "./pages/NotFoundView";
-import { inject, observer } from "mobx-react";
+
 import "../css/App.css";
 
 class App extends Component {
-  /* state = {
-    employees: [],
-    selectedDepartment: "SHOW ALL"
-  }; */
-  /* componentDidMount() {
-    getEmployeesFromApi().then(employeesFromApi =>
-      this.setState({ employees: [...employeesFromApi] })
-    );
-  } */
-
-  /* handleEmployeeSelect = e => {
-    this.setState({
-      selectedDepartment: e.target.value
-    });
-  }; */
-
-  /* uniqueEmployeeDepartments = () => {
-    const departments = this.state.employees.map(
-      employee => employee.department
-    );
-    return [...new Set(departments)];
-  }; */
-  /* filteredEmployeeList = () => {
-    return filteredEmployees(this.state.employees, "department", [
-      this.state.selectedDepartment
-    ]);
-  }; */
   render() {
     return (
       <div>
@@ -56,13 +27,7 @@ class App extends Component {
             </Link>
           </nav>
           <Router>
-            <EmployeesDirectoryView
-              path="/employees"
-              //employees={this.filteredEmployeeList()}
-              //departments={this.uniqueEmployeeDepartments()}
-              //handleEmployeeSelect={this.handleEmployeeSelect}
-              //selectedDepartment={this.state.selectedDepartment}
-            />
+            <EmployeesDirectoryView path="/employees" />
             <EmployeeProfileView
               path="profile/:employeeId"
               //employees={this.filteredEmployeeList()}

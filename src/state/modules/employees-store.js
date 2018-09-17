@@ -1,4 +1,4 @@
-import { action, computed, decorate } from "mobx";
+import { action, computed, decorate, observable } from "mobx";
 import getEmployeesFromApi from "../../utils/get-employees-from-api";
 import { filteredEmployees } from "../../helpers/filters";
 class EmployeesStore {
@@ -7,10 +7,12 @@ class EmployeesStore {
    */
   employees = [];
   currentEmployee = {};
-  selectedEmployeeDepartment = "SHOW ALL"; // could be an interface item
+  selectedDepartment = "SHOW ALL"; // could be an interface item
   departments = [];
   constructor(rootStore) {
     this.rootStore = rootStore;
+    // initialize employees from API
+    this.getEmployees();
   }
   /**
    * ACTIONS
@@ -21,28 +23,30 @@ class EmployeesStore {
     );
   }
 
-  handleEmployeeSelect = newDepartment => {
-    this.selectedDepartment = newDepartment;
-  };
+  handleEmployeeSelect({ department }) {
+    this.selectedDepartment = department;
+  }
 
   /**
    * COMPUTED FUNCTIONS
    */
   get uniqueEmployeeDepartments() {
-    const departments = this.state.employees.map(
-      employee => employee.department
-    );
+    const departments = this.employees.map(employee => employee.department);
     return [...new Set(departments)];
   }
   get filteredEmployeeList() {
-    return filteredEmployees(this.state.employees, "department", [
-      this.state.selectedDepartment
+    return filteredEmployees(this.employees, "department", [
+      this.selectedDepartment
     ]);
   }
 }
 decorate(EmployeesStore, {
+  employees: observable,
+  selectedDepartment: observable,
+  handleEmployeeSelect: action.bound,
   getEmployees: action,
   uniqueEmployeeDepartments: computed,
   filteredEmployeeList: computed
 });
+
 export default EmployeesStore;

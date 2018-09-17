@@ -7,8 +7,13 @@ import "./css/tailwind.css";
 import App from "./components/App";
 import registerServiceWorker from "./registerServiceWorker";
 
+const stores = {
+  employeesStore: Store.employeesStore,
+  uiStore: Store.uiStore
+};
+
 ReactDOM.render(
-  <Provider store={Store}>
+  <Provider {...stores}>
     <App />
   </Provider>,
   document.getElementById("root")

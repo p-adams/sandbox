@@ -1,4 +1,4 @@
-import { action, decorate, observerable } from "mobx";
+import { action, decorate, observable } from "mobx";
 import { navigate } from "@reach/router";
 class UIStore {
   /**
@@ -14,13 +14,13 @@ class UIStore {
    * ACTIONS
    */
 
-  viewEmployeeProfile = employeeId => {
+  viewEmployeeProfile(employeeId) {
     navigate(`/profile/${employeeId}`);
-  };
+  }
 }
 
 decorate(UIStore, {
-  routePath: observerable,
+  routePath: observable,
   currentNavigableItemPosition: observable,
   viewEmployeeProfile: action
 });

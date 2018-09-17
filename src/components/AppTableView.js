@@ -30,7 +30,7 @@ const AppTableView = ({ handleEvent, items, currentItem }) => {
   });
   return (
     <div className="appTableViewContainer mt-4 p-2 bg-grey-light overflow-auto">
-      {currentItem} - {tableViewCells}
+      {tableViewCells}
     </div>
   );
 };

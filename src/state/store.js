@@ -3,7 +3,7 @@ import EmployeesStore from "./modules/employees-store";
 class Store {
   constructor() {
     this.uiStore = new UIStore(this);
-    this.todoStore = new EmployeesStore(this);
+    this.employeesStore = new EmployeesStore(this);
   }
 }
 
