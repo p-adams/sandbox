@@ -16,7 +16,7 @@ class AppTableViewCell extends React.Component {
         style={currentItem === itemKey ? activeCellStyle : {}}
         className="max-w m-2 p-2 bg-white rounded overflow-hidden border border-white hover:shadow-lg shadow-md cursor-pointer"
         tabIndex="0"
-        onClick={() => handleEvent(selectorId)}
+        onClick={() => handleEvent(selectorId, itemKey)}
       >
         {renderCell()}
       </div>

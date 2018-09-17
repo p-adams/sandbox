@@ -20,7 +20,12 @@ class UIStore {
     this.currentNavigableItemPosition -= 1;
   }
 
-  viewEmployeeProfile(employeeId) {
+  updateCurrentNavigableItemPosition = newPosition => {
+    this.currentNavigableItemPosition = newPosition;
+  };
+
+  viewEmployeeProfile(employeeId, position) {
+    this.updateCurrentNavigableItemPosition(position);
     navigate(`/profile/${employeeId}`);
   }
 }
@@ -29,7 +34,7 @@ decorate(UIStore, {
   currentNavigableItemPosition: observable,
   incrementCurrentNavigableItemPosition: action.bound,
   decrementCurrentNavigableItemPosition: action.bound,
-  viewEmployeeProfile: action
+  viewEmployeeProfile: action.bound
 });
 
 export default UIStore;

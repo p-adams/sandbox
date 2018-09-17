@@ -41,7 +41,8 @@ class EmployeesStore {
 
   get currentEmployee() {
     const position = this.rootStore.uiStore.currentNavigableItemPosition;
-    return this.filteredEmployeeList[position];
+
+    return this.filteredEmployeeList[position] || {};
   }
 }
 decorate(EmployeesStore, {

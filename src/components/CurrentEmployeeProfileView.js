@@ -1,6 +1,6 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-// import getSingleEmployeeFromApi from "../utils/get-single-employee-from-api";
+
 import changeCase from "change-case";
 import parser from "another-name-parser";
 class CurrentEmployeeProfileView extends React.Component {
