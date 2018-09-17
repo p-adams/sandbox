@@ -33,6 +33,9 @@ class UIStore {
     this.currentNavigableItem = item;
   };
 
+  resetCurrentPage = () => {
+    this.currentPage = 1;
+  };
   handleClickPagination = newPageNumber => {
     this.currentPage = newPageNumber;
   };
@@ -90,6 +93,7 @@ decorate(UIStore, {
   handleRightArrowPagination: action,
   handleLeftArrowPagination: action,
   updateCurrentNavigableItem: action,
+  resetCurrentPage: action,
   indexOfFirstItem: computed,
   indexOfLastItem: computed,
   pageNumbers: computed

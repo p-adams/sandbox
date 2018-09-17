@@ -15,7 +15,7 @@ class EmployeesDirectoryView extends React.Component {
     const {
       employeesStore: {
         currentEmployees,
-        handleEmployeeSelect,
+        handleDepartmentSelect,
         selectedDepartment,
         uniqueEmployeeDepartments
       },
@@ -51,7 +51,7 @@ class EmployeesDirectoryView extends React.Component {
             value={selectedDepartment}
             doesFilter={true}
             handleChange={e =>
-              handleEmployeeSelect({ department: e.target.value })
+              handleDepartmentSelect({ department: e.target.value })
             }
           />
         </div>

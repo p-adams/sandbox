@@ -1,4 +1,5 @@
 import { action, computed, decorate, observable } from "mobx";
+
 import getEmployeesFromApi from "../../utils/get-employees-from-api";
 import { filteredEmployees } from "../../helpers/filters";
 class EmployeesStore {
@@ -22,13 +23,12 @@ class EmployeesStore {
     );
   }
 
-  handleEmployeeSelect({ department }) {
+  handleDepartmentSelect({ department }) {
+    const {
+      uiStore: { resetCurrentPage }
+    } = this.rootStore;
+    resetCurrentPage();
     this.selectedDepartment = department;
-  }
-
-  loadMoreEmployees() {
-    // check to see if there are more to load
-    // if there are more to load, take 5 or less (if 5 items do not exists)
   }
 
   /**
@@ -60,7 +60,7 @@ class EmployeesStore {
 decorate(EmployeesStore, {
   employees: observable,
   selectedDepartment: observable,
-  handleEmployeeSelect: action.bound,
+  handleDepartmentSelect: action.bound,
   loadMoreEmployees: action.bound,
   getEmployees: action,
   uniqueEmployeeDepartments: computed,
