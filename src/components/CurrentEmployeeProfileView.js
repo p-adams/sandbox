@@ -1,23 +1,13 @@
 import React from "react";
-import getSingleEmployeeFromApi from "../utils/get-single-employee-from-api";
+import { inject, observer } from "mobx-react";
+// import getSingleEmployeeFromApi from "../utils/get-single-employee-from-api";
 import changeCase from "change-case";
 import parser from "another-name-parser";
 class CurrentEmployeeProfileView extends React.Component {
-  state = {
-    currentEmployee: {}
-  };
-
-  componentDidMount() {
-    const { employeeId } = this.props;
-    getSingleEmployeeFromApi(employeeId).then(employee =>
-      this.setState({
-        currentEmployee: { ...employee }
-      })
-    );
-  }
   processedEmployee = () => {
-    const { currentEmployee } = this.state;
-
+    const {
+      employeesStore: { currentEmployee }
+    } = this.props;
     return Object.keys(currentEmployee)
       .map(() => {
         // We want to extract the first and last name of the current employee
@@ -49,4 +39,4 @@ class CurrentEmployeeProfileView extends React.Component {
   }
 }
 
-export default CurrentEmployeeProfileView;
+export default inject("employeesStore")(observer(CurrentEmployeeProfileView));

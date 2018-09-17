@@ -4,7 +4,6 @@ class UIStore {
   /**
    * STATE
    */
-  routePath = "";
   currentNavigableItemPosition = 0;
   constructor(rootStore) {
     this.rootStore = rootStore;
@@ -13,6 +12,13 @@ class UIStore {
   /**
    * ACTIONS
    */
+  incrementCurrentNavigableItemPosition() {
+    this.currentNavigableItemPosition += 1;
+  }
+
+  decrementCurrentNavigableItemPosition() {
+    this.currentNavigableItemPosition -= 1;
+  }
 
   viewEmployeeProfile(employeeId) {
     navigate(`/profile/${employeeId}`);
@@ -20,8 +26,9 @@ class UIStore {
 }
 
 decorate(UIStore, {
-  routePath: observable,
   currentNavigableItemPosition: observable,
+  incrementCurrentNavigableItemPosition: action.bound,
+  decrementCurrentNavigableItemPosition: action.bound,
   viewEmployeeProfile: action
 });
 

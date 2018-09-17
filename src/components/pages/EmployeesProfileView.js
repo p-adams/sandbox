@@ -1,5 +1,5 @@
 import React from "react";
-
+import { inject, observer } from "mobx-react";
 import NavigableView from "../NavigableView";
 import CurrentEmployeeProfileView from "../CurrentEmployeeProfileView";
 
@@ -18,7 +18,10 @@ class EmployeeProfileViewPane extends React.Component {
   } 
   getNextEmployee() {} */
   render() {
-    const { employees, employeeId } = this.props;
+    const {
+      employeesStore: { filteredEmployeeList },
+      employeeId
+    } = this.props;
 
     return (
       <div className="viewPaneHeight w-full bg-white">
@@ -28,8 +31,8 @@ class EmployeeProfileViewPane extends React.Component {
           <div className="w-2/3 mt-8">
             <div className="w-full p-1 max-w-lg h-64 shadow-lg">
               <NavigableView
-                // items={employees}
-                // navigationPath="employees"
+                items={filteredEmployeeList}
+                navigationPath="employees"
                 renderView={currentNavigableItem => (
                   <div>
                     {currentNavigableItem}
@@ -50,9 +53,4 @@ class EmployeeProfileViewPane extends React.Component {
   }
 }
 
-export default EmployeeProfileViewPane;
-
-/** PROPS
- *            path="profile/:employeeId"
-              employees={this.filteredEmployeeList()}
- */
+export default inject("employeesStore")(observer(EmployeeProfileViewPane));

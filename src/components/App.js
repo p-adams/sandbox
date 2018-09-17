@@ -28,14 +28,8 @@ class App extends Component {
           </nav>
           <Router>
             <EmployeesDirectoryView path="/employees" />
-            <EmployeeProfileView
-              path="profile/:employeeId"
-              //employees={this.filteredEmployeeList()}
-            />
-            <FormView
-              path="form"
-              // departments={this.uniqueEmployeeDepartments()}
-            />
+            <EmployeeProfileView path="profile/:employeeId" />
+            <FormView path="form" />
             <NotFoundView default />
           </Router>
         </div>

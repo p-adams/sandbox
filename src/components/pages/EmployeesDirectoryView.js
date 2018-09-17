@@ -75,11 +75,3 @@ class EmployeesDirectoryView extends React.Component {
 export default inject("employeesStore", "uiStore")(
   observer(EmployeesDirectoryView)
 );
-
-/** PROPS
- *            path="/employees"
-              employees={this.filteredEmployeeList()}
-              departments={this.uniqueEmployeeDepartments()}
-              handleEmployeeSelect={this.handleEmployeeSelect}
-              selectedDepartment={this.state.selectedDepartment}
- */

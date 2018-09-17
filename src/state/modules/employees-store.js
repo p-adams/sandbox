@@ -6,7 +6,6 @@ class EmployeesStore {
    * STATE
    */
   employees = [];
-  currentEmployee = {};
   selectedDepartment = "SHOW ALL"; // could be an interface item
   departments = [];
   constructor(rootStore) {
@@ -39,6 +38,11 @@ class EmployeesStore {
       this.selectedDepartment
     ]);
   }
+
+  get currentEmployee() {
+    const position = this.rootStore.uiStore.currentNavigableItemPosition;
+    return this.filteredEmployeeList[position];
+  }
 }
 decorate(EmployeesStore, {
   employees: observable,
@@ -46,7 +50,8 @@ decorate(EmployeesStore, {
   handleEmployeeSelect: action.bound,
   getEmployees: action,
   uniqueEmployeeDepartments: computed,
-  filteredEmployeeList: computed
+  filteredEmployeeList: computed,
+  currentEmployee: computed
 });
 
 export default EmployeesStore;
