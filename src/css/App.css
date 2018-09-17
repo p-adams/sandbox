@@ -2,6 +2,11 @@ h4 {
   padding: 5px;
 }
 
+li {
+  display: inline;
+  list-style-type: none;
+}
+
 .viewPaneHeight {
   margin-top: 60px;
   height: 600px;

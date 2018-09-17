@@ -6,7 +6,6 @@ import { navigate } from "@reach/router";
 // keyboard navigation (arrow down, up, enter) of a TableView or List component
 class NavigableView extends React.Component {
   componentDidMount() {
-    // console.log("1", this.state.currentNavigableItem);
     document.addEventListener("keyup", this.nextNavigableItem);
   }
   componentWillUnmount() {
@@ -14,6 +13,7 @@ class NavigableView extends React.Component {
   }
 
   nextNavigableItem = e => {
+    e.stopPropagation();
     const {
       uiStore: {
         currentNavigableItemPosition,

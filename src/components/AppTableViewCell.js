@@ -1,8 +1,18 @@
 import React from "react";
+import { inject, observer } from "mobx-react";
 const activeCellStyle = {
   border: "2px solid blue"
 };
 class AppTableViewCell extends React.Component {
+  componentDidMount() {
+    const {
+      uiStore: { updateCurrentNavigableItem }
+    } = this.props;
+    if (this.tableViewCell.getAttribute("style")) {
+      updateCurrentNavigableItem(this.tableViewCell);
+    }
+  }
+
   render() {
     const {
       currentItem,
@@ -13,6 +23,7 @@ class AppTableViewCell extends React.Component {
     } = this.props;
     return (
       <div
+        ref={cell => (this.tableViewCell = cell)}
         style={currentItem === itemKey ? activeCellStyle : {}}
         className="max-w m-2 p-2 bg-white rounded overflow-hidden border border-white hover:shadow-lg shadow-md cursor-pointer"
         tabIndex="0"
@@ -24,4 +35,4 @@ class AppTableViewCell extends React.Component {
   }
 }
 
-export default AppTableViewCell;
+export default inject("uiStore")(observer(AppTableViewCell));

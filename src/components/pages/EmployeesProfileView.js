@@ -6,7 +6,7 @@ import CurrentEmployeeProfileView from "../CurrentEmployeeProfileView";
 class EmployeeProfileViewPane extends React.Component {
   render() {
     const {
-      employeesStore: { filteredEmployeeList },
+      employeesStore: { currentEmployees },
       employeeId
     } = this.props;
 
@@ -18,14 +18,13 @@ class EmployeeProfileViewPane extends React.Component {
           <div className="w-2/3 mt-8">
             <div className="w-full p-1 max-w-lg h-64 shadow-lg">
               <NavigableView
-                items={filteredEmployeeList}
+                items={currentEmployees}
                 navigationPath="employees"
                 renderView={currentNavigableItem => (
                   <div>
                     <CurrentEmployeeProfileView
                       currentNavigableItem={currentNavigableItem}
                       employeeId={employeeId}
-                      getPreviousEmployee={this.getPreviousEmployee}
                     />
                   </div>
                 )}

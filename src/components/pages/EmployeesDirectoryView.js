@@ -1,10 +1,9 @@
 import React from "react";
-// import { navigate } from "@reach/router";
 import { inject, observer } from "mobx-react";
 import AppTableView from "../AppTableView";
 import NavigableView from "../NavigableView";
 import AppSelect from "../AppSelect";
-import AppButton from "../AppButton";
+import PageNumbersView from "../PageNumbersView";
 // A simple name parsing module
 // that handles parsing fullnames
 // in format retrieved from API
@@ -15,16 +14,21 @@ class EmployeesDirectoryView extends React.Component {
   render() {
     const {
       employeesStore: {
-        filteredEmployeeList,
+        currentEmployees,
         handleEmployeeSelect,
         selectedDepartment,
         uniqueEmployeeDepartments
       },
-      uiStore: { viewEmployeeProfile }
+      uiStore: {
+        currentPage,
+        handlePagination,
+        viewEmployeeProfile,
+        pageNumbers
+      }
     } = this.props;
 
     // Filter employees by selected department
-    const processedEmployeeList = filteredEmployeeList
+    const processedEmployeeList = currentEmployees
       // Return only those employee fields we wish to reference in the TableView
       .map(filteredEmployee => {
         const { id, job_titles, name } = filteredEmployee;
@@ -36,6 +40,7 @@ class EmployeesDirectoryView extends React.Component {
           job_titles
         };
       });
+
     return (
       <div className="viewPaneHeight w-full bg-white">
         <h4 className="text-center mt-2 text-grey">Employees Directory</h4>
@@ -64,9 +69,11 @@ class EmployeesDirectoryView extends React.Component {
           )}
         />
         <hr />
-        <div className="w-full border-t flex justify-center">
-          <AppButton {...{ btnText: "Load More" }} />
-        </div>
+        <PageNumbersView
+          currentPage={currentPage}
+          pageNumbers={pageNumbers}
+          handlePagination={handlePagination}
+        />
       </div>
     );
   }

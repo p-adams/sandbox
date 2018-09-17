@@ -26,6 +26,11 @@ class EmployeesStore {
     this.selectedDepartment = department;
   }
 
+  loadMoreEmployees() {
+    // check to see if there are more to load
+    // if there are more to load, take 5 or less (if 5 items do not exists)
+  }
+
   /**
    * COMPUTED FUNCTIONS
    */
@@ -39,20 +44,29 @@ class EmployeesStore {
     ]);
   }
 
+  get currentEmployees() {
+    const {
+      uiStore: { indexOfFirstItem, indexOfLastItem }
+    } = this.rootStore;
+    return this.filteredEmployeeList.slice(indexOfFirstItem, indexOfLastItem);
+  }
+
   get currentEmployee() {
     const position = this.rootStore.uiStore.currentNavigableItemPosition;
 
-    return this.filteredEmployeeList[position] || {};
+    return this.currentEmployees[position] || {};
   }
 }
 decorate(EmployeesStore, {
   employees: observable,
   selectedDepartment: observable,
   handleEmployeeSelect: action.bound,
+  loadMoreEmployees: action.bound,
   getEmployees: action,
   uniqueEmployeeDepartments: computed,
   filteredEmployeeList: computed,
-  currentEmployee: computed
+  currentEmployee: computed,
+  currentEmployees: computed
 });
 
 export default EmployeesStore;
