@@ -33,8 +33,16 @@ class UIStore {
     this.currentNavigableItem = item;
   };
 
-  handlePagination = newPageNumber => {
+  handleClickPagination = newPageNumber => {
     this.currentPage = newPageNumber;
+  };
+
+  handleRightArrowPagination = () => {
+    if (this.currentPage < this.pageNumbers.length) this.currentPage++;
+  };
+
+  handleLeftArrowPagination = () => {
+    if (this.currentPage > 1) this.currentPage--;
   };
 
   viewEmployeeProfile(employeeId, position) {
@@ -78,7 +86,9 @@ decorate(UIStore, {
   incrementCurrentNavigableItemPosition: action.bound,
   decrementCurrentNavigableItemPosition: action.bound,
   viewEmployeeProfile: action.bound,
-  handlePagination: action,
+  handleClickPagination: action,
+  handleRightArrowPagination: action,
+  handleLeftArrowPagination: action,
   updateCurrentNavigableItem: action,
   indexOfFirstItem: computed,
   indexOfLastItem: computed,

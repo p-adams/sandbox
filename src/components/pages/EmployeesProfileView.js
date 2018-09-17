@@ -8,7 +8,7 @@ class EmployeeProfileViewPane extends React.Component {
   render() {
     const {
       employeesStore: { currentEmployees },
-      uiStore: { currentPage, handlePagination, pageNumbers },
+      uiStore: { currentPage, handleClickPagination, pageNumbers },
       employeeId
     } = this.props;
 
@@ -39,7 +39,7 @@ class EmployeeProfileViewPane extends React.Component {
           <PageNumbersView
             currentPage={currentPage}
             pageNumbers={pageNumbers}
-            handlePagination={handlePagination}
+            handlePagination={handleClickPagination}
           />
         </div>
       </div>

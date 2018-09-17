@@ -19,9 +19,7 @@ class App extends Component {
             <Link className="p-1" to="/employees">
               View all employees
             </Link>
-            <Link className="p-1" to="profile">
-              View profile
-            </Link>
+
             <Link className="p-1" to="form">
               Add employee
             </Link>

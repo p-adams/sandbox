@@ -21,7 +21,7 @@ class EmployeesDirectoryView extends React.Component {
       },
       uiStore: {
         currentPage,
-        handlePagination,
+        handleClickPagination,
         viewEmployeeProfile,
         pageNumbers
       }
@@ -72,7 +72,7 @@ class EmployeesDirectoryView extends React.Component {
         <PageNumbersView
           currentPage={currentPage}
           pageNumbers={pageNumbers}
-          handlePagination={handlePagination}
+          handlePagination={handleClickPagination}
         />
       </div>
     );

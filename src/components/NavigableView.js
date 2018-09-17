@@ -18,7 +18,8 @@ class NavigableView extends React.Component {
         currentNavigableItemPosition,
         decrementCurrentNavigableItemPosition,
         incrementCurrentNavigableItemPosition,
-        handlePagination,
+        handleRightArrowPagination,
+        handleLeftArrowPagination,
         pageNumbers,
         currentPage
       }
@@ -46,15 +47,12 @@ class NavigableView extends React.Component {
       incrementCurrentNavigableItemPosition();
     }
     // if key pressed is left arrow, navigate to previous page
-
-    if (e.keyCode === 37 && currentPage > 1) {
-      let decrementedPage = currentPage;
-      handlePagination((decrementedPage -= 1));
+    if (e.keyCode === 37) {
+      handleLeftArrowPagination();
     }
     // if key pressed is right arrow, navigate to next page
-    if (e.keyCode === 39 && currentPage < pageNumbers.length) {
-      let incrementedPage = currentPage;
-      handlePagination((incrementedPage += 1));
+    if (e.keyCode === 39) {
+      handleRightArrowPagination();
     }
   };
   render() {
