@@ -19,9 +19,7 @@ class NavigableView extends React.Component {
         decrementCurrentNavigableItemPosition,
         incrementCurrentNavigableItemPosition,
         handleRightArrowPagination,
-        handleLeftArrowPagination,
-        pageNumbers,
-        currentPage
+        handleLeftArrowPagination
       }
     } = this.props;
 

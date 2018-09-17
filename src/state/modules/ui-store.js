@@ -29,7 +29,6 @@ class UIStore {
     this.currentNavigableItemPosition = newPosition;
   };
   updateCurrentNavigableItem = item => {
-    console.log("item", item);
     this.currentNavigableItem = item;
   };
 
