@@ -4,7 +4,7 @@ class UIStore {
   /**
    * STATE
    */
-  currentNavigableItem = null;
+
   currentNavigableItemPosition = 0;
   currentPage = 1;
   itemsPerPage = 5;
@@ -17,19 +17,16 @@ class UIStore {
   /**
    * ACTIONS
    */
-  incrementCurrentNavigableItemPosition() {
+  incrementCurrentNavigableItemPosition = () => {
     this.currentNavigableItemPosition += 1;
-  }
+  };
 
-  decrementCurrentNavigableItemPosition() {
+  decrementCurrentNavigableItemPosition = () => {
     this.currentNavigableItemPosition -= 1;
-  }
+  };
 
   updateCurrentNavigableItemPosition = newPosition => {
     this.currentNavigableItemPosition = newPosition;
-  };
-  updateCurrentNavigableItem = item => {
-    this.currentNavigableItem = item;
   };
 
   resetCurrentPage = () => {
@@ -47,10 +44,10 @@ class UIStore {
     if (this.currentPage > 1) this.currentPage--;
   };
 
-  viewEmployeeProfile(employeeId, position) {
+  viewEmployeeProfile = (employeeId, position) => {
     this.updateCurrentNavigableItemPosition(position);
     navigate(`/profile/${employeeId}`);
-  }
+  };
 
   /**
    * COMPUTED FUNCTIONS
@@ -83,11 +80,10 @@ class UIStore {
 
 decorate(UIStore, {
   currentNavigableItemPosition: observable,
-  currentNavigableItem: observable,
   currentPage: observable,
-  incrementCurrentNavigableItemPosition: action.bound,
-  decrementCurrentNavigableItemPosition: action.bound,
-  viewEmployeeProfile: action.bound,
+  incrementCurrentNavigableItemPosition: action,
+  decrementCurrentNavigableItemPosition: action,
+  viewEmployeeProfile: action,
   handleClickPagination: action,
   handleRightArrowPagination: action,
   handleLeftArrowPagination: action,

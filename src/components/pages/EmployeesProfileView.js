@@ -8,7 +8,12 @@ class EmployeeProfileViewPane extends React.Component {
   render() {
     const {
       employeesStore: { currentEmployees },
-      uiStore: { currentPage, handleClickPagination, pageNumbers },
+      uiStore: {
+        currentPage,
+        currentNavigableItemPosition,
+        handleClickPagination,
+        pageNumbers
+      },
       employeeId
     } = this.props;
 
@@ -22,10 +27,10 @@ class EmployeeProfileViewPane extends React.Component {
               <NavigableView
                 items={currentEmployees}
                 navigationPath="employees"
-                renderView={currentNavigableItem => (
+                renderView={() => (
                   <div>
                     <CurrentEmployeeProfileView
-                      currentNavigableItem={currentNavigableItem}
+                      currentNavigableItem={currentNavigableItemPosition}
                       employeeId={employeeId}
                     />
                   </div>

@@ -4,15 +4,6 @@ const activeCellStyle = {
   border: "2px solid blue"
 };
 class AppTableViewCell extends React.Component {
-  componentDidMount() {
-    const {
-      uiStore: { updateCurrentNavigableItem }
-    } = this.props;
-    if (this.tableViewCell.getAttribute("style")) {
-      updateCurrentNavigableItem(this.tableViewCell);
-    }
-  }
-
   render() {
     const {
       currentItem,

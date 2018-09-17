@@ -21,6 +21,7 @@ class EmployeesDirectoryView extends React.Component {
       },
       uiStore: {
         currentPage,
+        currentNavigableItemPosition,
         handleClickPagination,
         viewEmployeeProfile,
         pageNumbers
@@ -58,12 +59,12 @@ class EmployeesDirectoryView extends React.Component {
         <NavigableView
           items={processedEmployeeList}
           navigationPath="profile"
-          renderView={currentNavigableItem => (
+          renderView={() => (
             <div>
               <AppTableView
                 handleEvent={viewEmployeeProfile}
                 items={processedEmployeeList}
-                currentItem={currentNavigableItem}
+                currentItem={currentNavigableItemPosition}
               />
             </div>
           )}

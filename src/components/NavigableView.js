@@ -54,11 +54,7 @@ class NavigableView extends React.Component {
     }
   };
   render() {
-    const {
-      uiStore: { currentNavigableItemPosition }
-    } = this.props;
-    // might not need to pass currentNavigableItemPosition back up, since it's available in app state
-    return <div>{this.props.renderView(currentNavigableItemPosition)}</div>;
+    return <div>{this.props.renderView()}</div>;
   }
 }
 
