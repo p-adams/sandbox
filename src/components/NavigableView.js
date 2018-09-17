@@ -13,12 +13,14 @@ class NavigableView extends React.Component {
   }
 
   nextNavigableItem = e => {
-    e.stopPropagation();
     const {
       uiStore: {
         currentNavigableItemPosition,
         decrementCurrentNavigableItemPosition,
-        incrementCurrentNavigableItemPosition
+        incrementCurrentNavigableItemPosition,
+        handlePagination,
+        pageNumbers,
+        currentPage
       }
     } = this.props;
 
@@ -40,11 +42,19 @@ class NavigableView extends React.Component {
     if (e.keyCode === 38 && currentNavigableItemPosition > 0) {
       decrementCurrentNavigableItemPosition();
     } // if key pressed is down arrow, increment the currentNavigableItem position
-    else if (
-      e.keyCode === 40 &&
-      currentNavigableItemPosition < items.length - 1
-    ) {
+    if (e.keyCode === 40 && currentNavigableItemPosition < items.length - 1) {
       incrementCurrentNavigableItemPosition();
+    }
+    // if key pressed is left arrow, navigate to previous page
+
+    if (e.keyCode === 37 && currentPage > 1) {
+      let decrementedPage = currentPage;
+      handlePagination((decrementedPage -= 1));
+    }
+    // if key pressed is right arrow, navigate to next page
+    if (e.keyCode === 39 && currentPage < pageNumbers.length) {
+      let incrementedPage = currentPage;
+      handlePagination((incrementedPage += 1));
     }
   };
   render() {
