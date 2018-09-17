@@ -2,11 +2,13 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import NavigableView from "../NavigableView";
 import CurrentEmployeeProfileView from "../CurrentEmployeeProfileView";
+import PageNumbersView from "../PageNumbersView";
 
 class EmployeeProfileViewPane extends React.Component {
   render() {
     const {
       employeesStore: { currentEmployees },
+      uiStore: { currentPage, handlePagination, pageNumbers },
       employeeId
     } = this.props;
 
@@ -33,9 +35,18 @@ class EmployeeProfileViewPane extends React.Component {
           </div>
           <div className="w-1/3" />
         </div>
+        <div className="mt-12">
+          <PageNumbersView
+            currentPage={currentPage}
+            pageNumbers={pageNumbers}
+            handlePagination={handlePagination}
+          />
+        </div>
       </div>
     );
   }
 }
 
-export default inject("employeesStore")(observer(EmployeeProfileViewPane));
+export default inject("employeesStore", "uiStore")(
+  observer(EmployeeProfileViewPane)
+);
