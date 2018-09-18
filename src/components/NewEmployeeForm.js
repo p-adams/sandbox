@@ -62,7 +62,7 @@ class NewEmployeeForm extends React.Component {
           // if there are no errors adding the new employee to the database
           // display a success alert to the user and reset the form fields
           .then(employee => {
-            alert(`added ${employee.name} to database`);
+            alert(`added name:${employee.name}, id:${employee.id} to database`);
             this.resetFormFields();
           })
           // if there are errors adding the new employee to the database
