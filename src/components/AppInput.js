@@ -1,4 +1,5 @@
 import React from "react";
+import PropsTypes from "prop-types";
 
 const AppInput = props => {
   return (
@@ -18,6 +19,14 @@ const AppInput = props => {
       />
     </React.Fragment>
   );
+};
+
+AppInput.propTypes = {
+  name: PropsTypes.string,
+  label: PropsTypes.string.isRequired,
+  type: PropsTypes.string.isRequired,
+  handleChange: PropsTypes.func.isRequired,
+  placeholder: PropsTypes.string
 };
 
 export default AppInput;

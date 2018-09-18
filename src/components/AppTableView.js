@@ -1,14 +1,15 @@
 import React from "react";
+import PropTypes from "prop-types";
 import AppTableViewCell from "./AppTableViewCell";
 import changeCase from "change-case";
 
-const AppTableView = ({ handleEvent, items, currentItem }) => {
+const AppTableView = ({ handleEvent, items, position }) => {
   const tableViewCells = items.map((item, key) => {
     return (
       <AppTableViewCell
         handleEvent={handleEvent}
         selectorId={item.id}
-        currentItem={currentItem}
+        position={position}
         itemKey={key}
         key={key}
         renderCell={() => (
@@ -16,7 +17,7 @@ const AppTableView = ({ handleEvent, items, currentItem }) => {
             {Object.keys(item).map(
               (itemKey, index) =>
                 // We want a reference to employee ID but we do
-                // not want to show it in the interface
+                // not want to show it in the tableview cell
                 itemKey !== "id" ? (
                   <div className="text-grey-darker text-sm" key={index}>
                     {changeCase.title(itemKey)}: {item[itemKey]}
@@ -35,6 +36,12 @@ const AppTableView = ({ handleEvent, items, currentItem }) => {
       </div>
     </div>
   );
+};
+
+AppTableView.propTypes = {
+  handleEvent: PropTypes.func.isRequired,
+  items: PropTypes.array.isRequired,
+  position: PropTypes.number.isRequired
 };
 
 export default AppTableView;

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 class AppSelect extends React.Component {
   handleAppSelect = e => {
@@ -44,5 +45,12 @@ class AppSelect extends React.Component {
     );
   }
 }
+
+AppSelect.proptypes = {
+  doesFilter: PropTypes.bool.isRequired,
+  label: PropTypes.string.isRequired,
+  options: PropTypes.array.isRequired,
+  value: PropTypes.string.isRequired
+};
 
 export default AppSelect;

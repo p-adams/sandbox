@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 const disabledButton = {
   background: "gray"
 };
@@ -17,5 +18,11 @@ class AppButton extends React.Component {
     );
   }
 }
+
+AppButton.propTypes = {
+  handleClick: PropTypes.func.isRequired,
+  btnText: PropTypes.string.isRequired,
+  shouldDisable: PropTypes.bool
+};
 
 export default AppButton;
