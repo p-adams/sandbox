@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Router, Link } from "@reach/router";
+import { Router, Link, navigate } from "@reach/router";
 import EmployeesDirectoryView from "./pages/EmployeesDirectoryView";
 import EmployeeProfileView from "./pages/EmployeesProfileView";
 import FormView from "./pages/FormView";
@@ -8,6 +8,12 @@ import NotFoundView from "./pages/NotFoundView";
 import "../css/App.css";
 
 class App extends Component {
+  componentDidMount() {
+    // This is a workaround to solve issue
+    // of not being able to handle initial redirect from localhost:3000 to localhost:3000/employees
+    // in create-react-app configs
+    navigate("/employees");
+  }
   render() {
     return (
       <div>

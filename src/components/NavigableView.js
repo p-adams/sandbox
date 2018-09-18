@@ -30,7 +30,7 @@ class NavigableView extends React.Component {
       // if we want to navigate away from a path that requires a URL param
       // to a path that does not require a URL param
       // we check the navigationPath against a "list" of paths that do not require URL params
-      const navPathsWithoutParams = ["employees"].find(
+      const navPathsWithoutParams = ["employees", "form"].find(
         path => path === navigationPath
       );
       navPathsWithoutParams
