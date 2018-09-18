@@ -4,6 +4,9 @@ const activeCellStyle = {
   border: "2px solid blue"
 };
 class AppTableViewCell extends React.Component {
+  componentDidMount() {
+    this.tableViewCell.focus();
+  }
   render() {
     const {
       currentItem,
