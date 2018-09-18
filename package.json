@@ -14,6 +14,7 @@
     "start": "npm run tailwind:css && react-scripts start",
     "build": "npm run tailwind:css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "e2e": "cypress open",
     "eject": "react-scripts eject",
     "tailwind:css": "tailwind build src/css/tailwind.src.css -c  tailwind.js -o src/css/tailwind.css"
   },
