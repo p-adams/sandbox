@@ -4,6 +4,9 @@ import * as yup from "yup";
 export const newEmployeeSchema = yup.object().shape({
   name: yup.string().required(),
   job_titles: yup.string().required(),
-  employee_annual_salary: yup.string().required(),
+  employee_annual_salary: yup
+    .number()
+    .required()
+    .positive(),
   department: yup.string().required()
 });

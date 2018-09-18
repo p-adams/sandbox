@@ -23,7 +23,7 @@ class EmployeeProfileViewPane extends React.Component {
         <div className="flex">
           <div className="w-1/3" />
           <div className="w-2/3 mt-8">
-            <div className="w-full p-1 max-w-lg h-64 shadow-lg">
+            <div className="w-full p-1 max-w-lg shadow-lg">
               <NavigableView
                 items={currentEmployees}
                 navigationPath="employees"

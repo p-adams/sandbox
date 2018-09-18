@@ -1,5 +1,6 @@
 import { action, computed, decorate, observable } from "mobx";
 import getEmployeesFromApi from "../../utils/get-employees-from-api";
+import addNewEmployee from "../../utils/add-new-employee-to-db";
 import { filteredEmployees } from "../../helpers/filters";
 class EmployeesStore {
   /**
@@ -31,9 +32,9 @@ class EmployeesStore {
     this.selectedDepartment = department;
   };
 
-  addNewEmployeeToDb = (newEmployee) => {
-    console.log(newEmployee)
-  }
+  addNewEmployeeToDb = newEmployee => {
+    // addNewEmployee(newEmployee);
+  };
 
   /**
    * COMPUTED FUNCTIONS

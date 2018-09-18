@@ -16,8 +16,8 @@ class CurrentEmployeeProfileView extends React.Component {
         const { first, last } = parser(name);
         return {
           ...employee,
-          first,
-          last
+          firstname: first,
+          lastname: last
         };
       })
       .reduce((acc, x) => {
@@ -28,11 +28,11 @@ class CurrentEmployeeProfileView extends React.Component {
   render() {
     const currentEmployeeProfile = Object.keys(this.processedEmployee()).map(
       (key, index) => {
-        return key !== "id" ? (
+        return (
           <div className="p-2 m-2 text-grey-darker text-lg" key={index}>
             {changeCase.title(key)}: {this.processedEmployee()[key]}
           </div>
-        ) : null;
+        );
       }
     );
     return <div>{currentEmployeeProfile}</div>;

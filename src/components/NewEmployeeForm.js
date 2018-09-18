@@ -46,9 +46,16 @@ class NewEmployeeForm extends React.Component {
       employeesStore: { addNewEmployeeToDb }
     } = this.props;
     const { newEmployee } = this.state;
-    newEmployeeSchema.isValid(newEmployee).then(valid => {
+
+    // ensure that the new employee employee_annual_salary field is a number
+    const processedEmployee = {
+      ...newEmployee,
+      employee_annual_salary: Number(newEmployee.employee_annual_salary)
+    };
+
+    newEmployeeSchema.isValid(processedEmployee).then(valid => {
       if (valid) {
-        addNewEmployeeToDb(newEmployee);
+        addNewEmployeeToDb(processedEmployee);
         this.resetFormFields();
         alert("New employee added to database");
       } else {
