@@ -33,7 +33,7 @@ class EmployeesStore {
   };
 
   addNewEmployeeToDb = newEmployee => {
-    // addNewEmployee(newEmployee);
+    addNewEmployee(newEmployee);
   };
 
   /**

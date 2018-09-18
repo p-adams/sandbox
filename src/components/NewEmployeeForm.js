@@ -39,26 +39,41 @@ class NewEmployeeForm extends React.Component {
     }));
   };
   handleFormSubmission = () => {
-    setTimeout(() => {
-      this.resetProcessingEmployees();
-    }, 300);
     const {
       employeesStore: { addNewEmployeeToDb }
     } = this.props;
     const { newEmployee } = this.state;
 
-    // ensure that the new employee employee_annual_salary field is a number
+    setTimeout(() => {
+      this.resetProcessingEmployees();
+    }, 300);
+
+    // ensure that the new employee 'employee_annual_salary' field is a number
     const processedEmployee = {
       ...newEmployee,
       employee_annual_salary: Number(newEmployee.employee_annual_salary)
     };
-
+    // validate that all required form fields are met
     newEmployeeSchema.isValid(processedEmployee).then(valid => {
+      // if the form data complies with the schema
       if (valid) {
-        addNewEmployeeToDb(processedEmployee);
-        this.resetFormFields();
-        alert("New employee added to database");
-      } else {
+        // add the new employee to the DB
+        addNewEmployeeToDb(processedEmployee)
+          // if there are no errors adding the new employee to the database
+          // display a success alert to the user and reset the form fields
+          .then(employee => {
+            alert(`added ${employee.name} to database`);
+            this.resetFormFields();
+          })
+          // if there are errors adding the new employee to the database
+          // display an error message to the user
+          .catch(error => {
+            this.setState({ errorProcessingForm: true });
+            console.log(error);
+          });
+      } // if the form data does not comply with the schema
+      // display error message to the user
+      else {
         this.setState({ errorProcessingForm: true });
       }
       this.resetProcessingEmployees();
