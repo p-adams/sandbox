@@ -1,12 +1,16 @@
 import React from "react";
-
+const disabledButton = {
+  background: "gray"
+};
 class AppButton extends React.Component {
   render() {
-    const { handleClick, btnText } = this.props;
+    const { handleClick, btnText, shouldDisable } = this.props;
     return (
       <button
+        style={shouldDisable ? disabledButton : {}}
         className="h-12 w-48 m-2 rounded-sm bg-blue active:bg-blue-dark text-white"
         onClick={handleClick}
+        disabled={shouldDisable}
       >
         {btnText}
       </button>

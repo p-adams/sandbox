@@ -1,6 +1,6 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-
+import { newEmployeeSchema } from "../utils/validationSchemas";
 import AppButton from "./AppButton";
 import AppInput from "./AppInput";
 import AppSelect from "./AppSelect";
@@ -12,18 +12,55 @@ class NewEmployeeForm extends React.Component {
       job_titles: "",
       employee_annual_salary: "",
       department: ""
-    }
+    },
+    processingEmployeeFields: false,
+    errorProcessingForm: false
   };
   handleInputChange = ({ value, field }) => {
+    this.setState({ errorProcessingForm: false });
     this.setState(prevState => ({
       newEmployee: { ...prevState.newEmployee, [field]: value }
     }));
   };
+  resetProcessingEmployees = () => {
+    this.setState(prevState => ({
+      processingEmployeeFields: !prevState.processingEmployeeFields
+    }));
+  };
+  resetFormFields = () => {
+    this.setState(prevState => ({
+      newEmployee: {
+        ...prevState.newEmployee,
+        name: "",
+        job_titles: "",
+        employee_annual_salary: "",
+        department: ""
+      }
+    }));
+  };
+  handleFormSubmission = () => {
+    setTimeout(() => {
+      this.resetProcessingEmployees();
+    }, 300);
+    const {
+      employeesStore: { addNewEmployeeToDb }
+    } = this.props;
+    const { newEmployee } = this.state;
+    newEmployeeSchema.isValid(newEmployee).then(valid => {
+      if (valid) {
+        addNewEmployeeToDb(newEmployee);
+        this.resetFormFields();
+        alert("New employee added to database");
+      } else {
+        this.setState({ errorProcessingForm: true });
+      }
+      this.resetProcessingEmployees();
+    });
+  };
   render() {
     const { newEmployee } = this.state;
-    const { departments } = this.props;
     const {
-      employeesStore: { addNewEmployeeToDb, uniqueEmployeeDepartments }
+      employeesStore: { uniqueEmployeeDepartments }
     } = this.props;
     return (
       <div className="w-full p-1 max-w-lg shadow-lg">
@@ -33,15 +70,19 @@ class NewEmployeeForm extends React.Component {
               className="w-full"
               type="text"
               label="Fullname"
-              value={newEmployee.firstname}
+              value={newEmployee.name}
               handleChange={e =>
                 this.handleInputChange({
                   value: e.target.value,
                   field: "name"
                 })
               }
-              placeholder="Enter fullname (Lastname, Firstname Middle Initial (optional)"
+              placeholder="Enter fullname. Ex: Doe, John J"
             />
+            <h6 className="text-yellow-dark">
+              Please use the supported fullname format: lastname, firstname
+              middle initial (optional)
+            </h6>
           </div>
         </div>
         <div className="flex flex-wrap mx-3 mb-6">
@@ -80,7 +121,7 @@ class NewEmployeeForm extends React.Component {
               label="Department"
               value={newEmployee.department}
               doesFilter={false}
-              options={departments}
+              options={uniqueEmployeeDepartments}
               handleChange={e =>
                 this.handleInputChange({
                   value: e.target.value,
@@ -90,10 +131,25 @@ class NewEmployeeForm extends React.Component {
             />
           </div>
         </div>
+        <div className="flex flex-wrap mx-3 mb-6">
+          <div className="w-full px-3 mb-6 md:mb-0">
+            <h5 className="text-red-dark">
+              {this.state.errorProcessingForm
+                ? "Error processing form! Please make sure all fields are filled out correctly and try again."
+                : null}
+            </h5>
+          </div>
+        </div>
+
         <div className="flex justify-end mx-3 mb-2">
           <AppButton
-            handleClick={() => addNewEmployeeToDb(newEmployee)}
-            {...{ btnText: "Add employee" }}
+            handleClick={() => this.handleFormSubmission()}
+            {...{
+              btnText: this.state.processingEmployeeFields
+                ? "Processing request"
+                : "Add employee"
+            }}
+            shouldDisable={this.state.processingEmployeeFields}
           />
         </div>
       </div>
