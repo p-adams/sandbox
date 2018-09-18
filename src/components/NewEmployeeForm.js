@@ -1,4 +1,6 @@
 import React from "react";
+import { inject, observer } from "mobx-react";
+
 import AppButton from "./AppButton";
 import AppInput from "./AppInput";
 import AppSelect from "./AppSelect";
@@ -6,8 +8,7 @@ import AppSelect from "./AppSelect";
 class NewEmployeeForm extends React.Component {
   state = {
     newEmployee: {
-      firstname: "",
-      lastname: "",
+      name: "",
       job_titles: "",
       employee_annual_salary: "",
       department: ""
@@ -21,35 +22,25 @@ class NewEmployeeForm extends React.Component {
   render() {
     const { newEmployee } = this.state;
     const { departments } = this.props;
+    const {
+      employeesStore: { addNewEmployeeToDb, uniqueEmployeeDepartments }
+    } = this.props;
     return (
       <div className="w-full p-1 max-w-lg shadow-lg">
         <div className="flex flex-wrap mx-3 mb-6">
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <div className="w-full mt-2 px-3 mb-6 md:mb-0">
             <AppInput
+              className="w-full"
               type="text"
-              label="Firstname"
+              label="Fullname"
               value={newEmployee.firstname}
               handleChange={e =>
                 this.handleInputChange({
                   value: e.target.value,
-                  field: "firstname"
+                  field: "name"
                 })
               }
-              placeholder="Enter first name"
-            />
-          </div>
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <AppInput
-              type="text"
-              label="Lastname"
-              value={newEmployee.lastname}
-              handleChange={e =>
-                this.handleInputChange({
-                  value: e.target.value,
-                  field: "lastname"
-                })
-              }
-              placeholder="Enter last name"
+              placeholder="Enter fullname (Lastname, Firstname Middle Initial (optional)"
             />
           </div>
         </div>
@@ -100,11 +91,14 @@ class NewEmployeeForm extends React.Component {
           </div>
         </div>
         <div className="flex justify-end mx-3 mb-2">
-          <AppButton {...{ btnText: "Add employee" }} />
+          <AppButton
+            handleClick={() => addNewEmployeeToDb(newEmployee)}
+            {...{ btnText: "Add employee" }}
+          />
         </div>
       </div>
     );
   }
 }
 
-export default NewEmployeeForm;
+export default inject("employeesStore")(observer(NewEmployeeForm));

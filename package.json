@@ -14,7 +14,6 @@
     "start": "npm run tailwind:css && react-scripts start",
     "build": "npm run tailwind:css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "unit": "jest",
     "eject": "react-scripts eject",
     "tailwind:css": "tailwind build src/css/tailwind.src.css -c  tailwind.js -o src/css/tailwind.css"
   },
@@ -22,7 +21,7 @@
     "another-name-parser": "0.0.5",
     "change-case": "^3.0.2",
     "cypress": "^3.1.0",
-    "jest": "^23.6.0",
-    "tailwindcss": "^0.6.5"
+    "tailwindcss": "^0.6.5",
+    "yup": "^0.26.5"
   }
 }

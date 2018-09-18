@@ -11,7 +11,6 @@ class UIStore {
 
   constructor(rootStore) {
     this.rootStore = rootStore;
-    // this.updateCurrentNavigableItem(this.rootStore.employeesStore.employees[0]);
   }
 
   /**

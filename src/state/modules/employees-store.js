@@ -31,6 +31,10 @@ class EmployeesStore {
     this.selectedDepartment = department;
   };
 
+  addNewEmployeeToDb = (newEmployee) => {
+    console.log(newEmployee)
+  }
+
   /**
    * COMPUTED FUNCTIONS
    */
@@ -65,6 +69,7 @@ decorate(EmployeesStore, {
   selectedDepartment: observable,
   handleDepartmentSelect: action,
   getEmployees: action,
+  addNewEmployeeToDb: action,
   uniqueEmployeeDepartments: computed,
   filteredEmployeeList: computed,
   currentEmployee: computed,
