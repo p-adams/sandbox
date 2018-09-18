@@ -10,7 +10,7 @@ class NewEmployeeForm extends React.Component {
     newEmployee: {
       name: "",
       job_titles: "",
-      employee_annual_salary: "",
+      employee_annual_salary: 0,
       department: ""
     },
     processingEmployeeFields: false,
