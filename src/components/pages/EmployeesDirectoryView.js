@@ -25,7 +25,8 @@ const EmployeesDirectoryView = inject("employeesStore", "uiStore")(
           uiStore: {
             currentPage,
             currentNavigableItemPosition,
-            handleClickPagination,
+            handleLeftArrowPagination,
+            handleRightArrowPagination,
             viewEmployeeProfile,
             pageNumbers
           }
@@ -76,7 +77,8 @@ const EmployeesDirectoryView = inject("employeesStore", "uiStore")(
             <PageNumbersView
               currentPage={currentPage}
               pageNumbers={pageNumbers}
-              handlePagination={handleClickPagination}
+              handlePrevPage={handleLeftArrowPagination}
+              handleNextPage={handleRightArrowPagination}
             />
           </div>
         );
@@ -89,7 +91,8 @@ EmployeesDirectoryView.wrappedComponent.propTypes = {
   uiStore: PropTypes.shape({
     currentPage: PropTypes.number.isRequired,
     currentNavigableItemPosition: PropTypes.number.isRequired,
-    handleClickPagination: PropTypes.func.isRequired,
+    handleLeftArrowPagination: PropTypes.func.isRequired,
+    handleRightArrowPagination: PropTypes.func.isRequired,
     viewEmployeeProfile: PropTypes.func.isRequired,
     pageNumbers: PropTypes.array.isRequired
   }),

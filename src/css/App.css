@@ -8,10 +8,10 @@ li {
 }
 
 .viewPaneHeight {
-  margin-top: 60px;
-  height: 600px;
+  margin-top: 20px;
+  height: 650px;
 }
 
-.appTableViewContainer {
-  height: 400px;
+.pageNumbersView {
+  width: 400px;
 }

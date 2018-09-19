@@ -14,7 +14,8 @@ const EmployeeProfileViewPane = inject("employeesStore", "uiStore")(
           uiStore: {
             currentPage,
             currentNavigableItemPosition,
-            handleClickPagination,
+            handleLeftArrowPagination,
+            handleRightArrowPagination,
             pageNumbers
           },
           employeeId
@@ -47,7 +48,8 @@ const EmployeeProfileViewPane = inject("employeesStore", "uiStore")(
               <PageNumbersView
                 currentPage={currentPage}
                 pageNumbers={pageNumbers}
-                handlePagination={handleClickPagination}
+                handlePrevPage={handleLeftArrowPagination}
+                handleNextPage={handleRightArrowPagination}
               />
             </div>
           </div>
@@ -61,7 +63,8 @@ EmployeeProfileViewPane.wrappedComponent.propTypes = {
   uiStore: PropTypes.shape({
     currentPage: PropTypes.number.isRequired,
     currentNavigableItemPosition: PropTypes.number.isRequired,
-    handleClickPagination: PropTypes.func.isRequired,
+    handleLeftArrowPagination: PropTypes.func.isRequired,
+    handleRightArrowPagination: PropTypes.func.isRequired,
     pageNumbers: PropTypes.array.isRequired
   }),
   employeesStore: PropTypes.shape({

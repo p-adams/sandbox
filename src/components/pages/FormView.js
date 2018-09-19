@@ -7,7 +7,7 @@ const FormView = () => {
       <h4 className="text-center mt-2 text-grey">New Employee Form</h4>
       <div className="flex">
         <div className="w-1/3" />
-        <div className="w-2/3 mt-8">
+        <div className="w-2/3 mt-2">
           <NewEmployeeForm />
         </div>
         <div className="w-1/3" />

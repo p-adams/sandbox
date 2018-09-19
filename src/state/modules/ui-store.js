@@ -31,15 +31,14 @@ class UIStore {
   resetCurrentPage = () => {
     this.currentPage = 1;
   };
-  handleClickPagination = newPageNumber => {
-    this.currentPage = newPageNumber;
-  };
 
   handleRightArrowPagination = () => {
+    console.log("a");
     if (this.currentPage < this.pageNumbers.length) this.currentPage++;
   };
 
   handleLeftArrowPagination = () => {
+    console.log("b");
     if (this.currentPage > 1) this.currentPage--;
   };
 
@@ -83,7 +82,6 @@ decorate(UIStore, {
   incrementCurrentNavigableItemPosition: action,
   decrementCurrentNavigableItemPosition: action,
   viewEmployeeProfile: action,
-  handleClickPagination: action,
   handleRightArrowPagination: action,
   handleLeftArrowPagination: action,
   updateCurrentNavigableItem: action,

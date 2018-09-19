@@ -92,9 +92,9 @@ const NewEmployeeForm = inject("employeesStore")(
           employeesStore: { uniqueEmployeeDepartments }
         } = this.props;
         return (
-          <div className="w-full p-1 max-w-lg shadow-lg">
-            <div className="flex flex-wrap mx-3 mb-6">
-              <div className="w-full mt-2 px-3 mb-6 md:mb-0">
+          <div className="w-full p-1 shadow-lg">
+            <div className="flex flex-wrap mx-3 mb-4">
+              <div className="w-full mt-2 px-3 mb-4 md:mb-0">
                 <AppInput
                   className="w-full"
                   type="text"
@@ -114,8 +114,8 @@ const NewEmployeeForm = inject("employeesStore")(
                 </h6>
               </div>
             </div>
-            <div className="flex flex-wrap mx-3 mb-6">
-              <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <div className="flex flex-wrap mx-3 mb-4">
+              <div className="w-full md:w-1/2 px-3 mb-4 md:mb-0">
                 <AppInput
                   type="text"
                   label="Job Title"
@@ -129,7 +129,7 @@ const NewEmployeeForm = inject("employeesStore")(
                   placeholder="Enter job title"
                 />
               </div>
-              <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <div className="w-full md:w-1/2 px-3 mb-4 md:mb-0">
                 <AppInput
                   type="text"
                   label="Salary"
@@ -144,8 +144,8 @@ const NewEmployeeForm = inject("employeesStore")(
                 />
               </div>
             </div>
-            <div className="flex flex-wrap mx-3 mb-6">
-              <div className="w-full px-3 mb-6 md:mb-0">
+            <div className="flex flex-wrap mx-3 mb-4">
+              <div className="w-full px-3 mb-4 md:mb-0">
                 <AppSelect
                   label="Department"
                   value={newEmployee.department}
@@ -160,8 +160,8 @@ const NewEmployeeForm = inject("employeesStore")(
                 />
               </div>
             </div>
-            <div className="flex flex-wrap mx-3 mb-6">
-              <div className="w-full px-3 mb-6 md:mb-0">
+            <div className="flex flex-wrap mx-3 mb-4">
+              <div className="w-full px-3 mb-4 md:mb-0">
                 <h5 className="text-red-dark">
                   {this.state.errorProcessingForm
                     ? "Error processing form! Please make sure all fields are filled out correctly and try again."
@@ -173,11 +173,11 @@ const NewEmployeeForm = inject("employeesStore")(
             <div className="flex justify-end mx-3 mb-2">
               <AppButton
                 handleClick={() => this.handleFormSubmission()}
-                {...{
-                  btnText: this.state.processingEmployeeFields
+                btnText={
+                  this.state.processingEmployeeFields
                     ? "Processing request"
                     : "Add employee"
-                }}
+                }
                 shouldDisable={this.state.processingEmployeeFields}
               />
             </div>
