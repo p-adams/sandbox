@@ -1,3 +1,0 @@
-/**
- * ADD INTEGRATION TESTS
- */
